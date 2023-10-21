@@ -29,10 +29,11 @@ public class ClientService {
     }
 
     //Delete Client By Id
-    public void deleteClientById(Long id){
+    public Long deleteClientById(Long id){
         Client c = repository.findById(id).orElseThrow(() -> new RuntimeException("ERROR: Client not found"));
         if(c != null){
             repository.delete(c);
+            return id;
         }else{
             throw new RuntimeException("ERROR: Client not found");
         }

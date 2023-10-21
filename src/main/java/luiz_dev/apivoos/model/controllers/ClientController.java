@@ -5,9 +5,11 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,10 +43,24 @@ public class ClientController {
     }
 
     @PostMapping
-    public String saveClient(@RequestBody ClientDTO dto){
+    public ResponseEntity<ClientDTO> saveClient(@RequestBody ClientDTO dto){
         Client c = dto.toClient();
-        service.insertClient(c);
-        return "Client Saved!! id="+c.getId();
+        Client newClient = service.insertClient(c);
+        //URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newClient.getId()).toUri();
+        return ResponseEntity.ok().body(newClient.toDTO());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Long> deleteClient(@PathVariable Long id){
+        service.deleteClientById(id);
+        return ResponseEntity.ok().body(id);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateClient(@PathVariable Long id, @RequestBody ClientDTO dto){
+        Client c = dto.toClient();
+        String msg = service.updateClientById(id, c);
+        return ResponseEntity.ok().body(msg);
     }
 
 }

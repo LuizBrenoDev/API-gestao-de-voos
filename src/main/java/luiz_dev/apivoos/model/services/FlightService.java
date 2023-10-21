@@ -20,4 +20,21 @@ public class FlightService {
     public Flight searchById(Long id){
         return repository.findById(id).orElseThrow(() -> new RuntimeException("ERROR: Client Not Found"));
     }
+
+    public Flight insertFlight(Flight flight){
+        return repository.save(flight);
+    }
+
+    public Long deleteFlight (Long id){
+        Flight f = repository.findById(id).orElseThrow(
+           () -> new RuntimeException("ERROR: Flight not Found")
+        );
+        
+        if (f != null){
+            repository.deleteById(id);
+            return id;
+        }else{
+            throw new RuntimeException("ERROR: Flight not be null");
+        }
+    }
 }
