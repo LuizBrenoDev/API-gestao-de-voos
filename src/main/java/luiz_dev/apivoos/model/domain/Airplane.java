@@ -13,7 +13,10 @@ public class Airplane implements Serializable{
     private Integer capacity;
     private Double velocity;
 
-    
+    public Airplane(){
+        
+    }
+
     public Airplane(Long airplane_id, String model, String company, Integer capacity, Double velocity) {
         this.airplane_id = airplane_id;
         this.model = model;

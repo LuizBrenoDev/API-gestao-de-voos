@@ -15,6 +15,11 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import luiz_dev.apivoos.model.domain.dto.FlightDTO;
 
+/**
+ * Preciso melhorar o relacionamento com a Airplane
+ * Preciso implementar funções especiais: Find By Destiny
+ * 
+ */
 @Entity
 @Table(name = "flights")
 public class Flight implements Serializable{
@@ -27,12 +32,13 @@ public class Flight implements Serializable{
     @Column(nullable = false, length = 50)
     private String destiny;
     @Column(nullable = false)
-    @OneToMany(cascade = CascadeType.REMOVE)
     private Set<Client> passengers = new HashSet<>();
     @Embedded
     private Airplane airplane;
 
-    
+    public Flight(){
+
+    }
 
     public Flight(Long id, String name, String destiny, Set<Client> passengers, Airplane airplane) {
         this.id = id;

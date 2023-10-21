@@ -51,9 +51,9 @@ public class ClientController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Long> deleteClient(@PathVariable Long id){
+    public ResponseEntity<String> deleteClient(@PathVariable Long id){
         service.deleteClientById(id);
-        return ResponseEntity.ok().body(id);
+        return ResponseEntity.ok().body("Flight deleted. id = "+id);
     }
 
     @PutMapping("/{id}")
