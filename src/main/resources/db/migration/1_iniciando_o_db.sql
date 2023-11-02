@@ -1,5 +1,5 @@
 CREATE DATABASE myflight;
-
+USE myflight;
 
 CREATE TABLE clients (
 	id LONG PRIMARY KEY UNIQUE NOT NULL,
@@ -13,7 +13,5 @@ CREATE TABLE flight (
 	id LONG PRIMARY KEY UNIQUE NOT NULL,
     name VARCHAR(100) NOT NULL,
     destiny VARCHAR(100) NOT NULL,
-    description VARCHAR(500) NOT NULL
+    description VARCHAR(250) NOT NULL
 );
-
-ALTER TABLE clients MODIFY cpf bigint;

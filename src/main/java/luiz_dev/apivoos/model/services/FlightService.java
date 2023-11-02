@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import luiz_dev.apivoos.model.domain.Flight;
+import luiz_dev.apivoos.model.exceptions.ObjectNotFoundException;
 import luiz_dev.apivoos.model.repositories.FlightRepository;
 
 @Service
@@ -18,13 +19,13 @@ public class FlightService {
     }
 
     public Flight searchById(Long id){
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("ERROR: Flight Not Found"));
+        return repository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Flight Not Found. Try modify the id in URI."));
     }
 
     public List<Flight> searchByDestiny(String destiny){
         List<Flight> flights = repository.findByDestiny(destiny);
         if (flights.isEmpty() == true) {
-            throw new RuntimeException("ERROR: Flight Not Found");
+            throw new ObjectNotFoundException("Flight Not Found. Try modify the destiny in URI.");
         }else{
             return flights;
         }
@@ -36,14 +37,14 @@ public class FlightService {
 
     public Long deleteFlight (Long id){
         Flight f = repository.findById(id).orElseThrow(
-           () -> new RuntimeException("ERROR: Flight not Found")
+           () -> new ObjectNotFoundException("Flight not Found. Try modify the id in URI.")
         );
         
         if (f != null){
             repository.deleteById(id);
             return id;
         }else{
-            throw new RuntimeException("ERROR: Flight not be null");
+            throw new ObjectNotFoundException("The Flight founded is null");
         }
     }
 }
