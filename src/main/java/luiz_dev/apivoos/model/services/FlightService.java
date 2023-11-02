@@ -18,7 +18,16 @@ public class FlightService {
     }
 
     public Flight searchById(Long id){
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("ERROR: Client Not Found"));
+        return repository.findById(id).orElseThrow(() -> new RuntimeException("ERROR: Flight Not Found"));
+    }
+
+    public List<Flight> searchByDestiny(String destiny){
+        List<Flight> flights = repository.findByDestiny(destiny);
+        if (flights.isEmpty() == true) {
+            throw new RuntimeException("ERROR: Flight Not Found");
+        }else{
+            return flights;
+        }
     }
 
     public Flight insertFlight(Flight flight){

@@ -32,8 +32,8 @@ public class DataBaseConfig implements CommandLineRunner{
 
         repository.saveAll(Arrays.asList(c1, c2, c3, c4));
 
-        Flight f1 = new Flight(null, "Incrível voo para a Disney", "Parque da Disney, California, EUA", new HashSet<>(Arrays.asList(c1, c2)), new Airplane(123L, "Airplane 123", "Secure Flights", 150, 30.0));
-        Flight f2 = new Flight(null, "Incrível voo para o Parque da Universal", "Parque da Universal, EUA", new HashSet<>(Arrays.asList(c3, c4)), new Airplane(335L, "Airplane 335", "Secure Flights", 200, 40.0));
+        Flight f1 = new Flight(null, "Incrível voo para a Disney", "Parque da Disney, California, EUA","Uma Incrível viagem para a Disney!!", new HashSet<>(Arrays.asList(c1, c2)), new Airplane(123L, "Airplane 123", "Secure Flights", 150, 30.0));
+        Flight f2 = new Flight(null, "Incrível voo para o Parque da Universal", "Parque da Universal, EUA","Uma maravilhosa viagem ao parque da universal!!", new HashSet<>(Arrays.asList(c3, c4)), new Airplane(335L, "Airplane 335", "Secure Flights", 200, 40.0));
 
         flightRepository.saveAll(Arrays.asList(f1, f2));
     }

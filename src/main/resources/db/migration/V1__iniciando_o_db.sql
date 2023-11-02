@@ -1,4 +1,5 @@
-create database myflight;
+CREATE DATABASE myflight;
+
 
 CREATE TABLE clients (
 	id LONG PRIMARY KEY UNIQUE NOT NULL,

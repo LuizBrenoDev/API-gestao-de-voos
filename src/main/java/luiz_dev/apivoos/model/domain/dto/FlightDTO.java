@@ -11,12 +11,13 @@ public record FlightDTO(
     Long id,
     String name,
     String destiny,
+    String description,
     Set<Client> passengers,
     @Embedded
     Airplane airplane
 ) {
     
     public Flight toFlight(){
-        return new Flight(this.id, this.name, this.destiny, this.passengers, this.airplane);
+        return new Flight(this.id, this.name, this.destiny, this.description, this.passengers, this.airplane);
     }
 }

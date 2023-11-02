@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -16,9 +15,7 @@ import jakarta.persistence.Table;
 import luiz_dev.apivoos.model.domain.dto.FlightDTO;
 
 /**
- * Preciso melhorar o relacionamento com a Airplane
- * Preciso implementar funções especiais: Find By Destiny
- * 
+ * Preciso implementar funções especiais: Find By Destiny 
  */
 @Entity
 @Table(name = "flights")
@@ -31,7 +28,10 @@ public class Flight implements Serializable{
     private String name;
     @Column(nullable = false, length = 50)
     private String destiny;
+    @Column(nullable = false, length = 500)
+    private String description;
     @Column(nullable = false)
+    @OneToMany()
     private Set<Client> passengers = new HashSet<>();
     @Embedded
     private Airplane airplane;
@@ -40,10 +40,11 @@ public class Flight implements Serializable{
 
     }
 
-    public Flight(Long id, String name, String destiny, Set<Client> passengers, Airplane airplane) {
+    public Flight(Long id, String name, String destiny, String description, Set<Client> passengers, Airplane airplane) {
         this.id = id;
         this.name = name;
         this.destiny = destiny;
+        this.description = description;
         this.passengers = passengers;
         this.airplane = airplane;
     }
@@ -65,6 +66,13 @@ public class Flight implements Serializable{
     public void setDestiny(String destiny) {
         this.destiny = destiny;
     }
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public void addPassenger(Client client){
         passengers.add(client);
@@ -82,7 +90,7 @@ public class Flight implements Serializable{
     }
 
     public FlightDTO toDTO(){
-        return new FlightDTO(this.id, this.name, this.destiny, this.passengers, this.airplane);
+        return new FlightDTO(this.id, this.name, this.destiny, this.description, this.passengers, this.airplane);
     }
 
     @Override

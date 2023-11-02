@@ -30,6 +30,13 @@ public class FlightController {
         return ResponseEntity.ok().body(dto);
     }
 
+    @GetMapping("/{destiny}")
+    public ResponseEntity<List<FlightDTO>> searchFlightByDestiny(@PathVariable String destiny){
+        List<Flight> flights = service.searchByDestiny(destiny);
+        List<FlightDTO> dtos = flights.stream().map(x -> x.toDTO()).collect(Collectors.toList());
+        return ResponseEntity.ok().body(dtos);
+    }
+
     @GetMapping
     public ResponseEntity<List<FlightDTO>> searchAllFlights(){
         List<Flight> flights = service.searchAllFlights();
