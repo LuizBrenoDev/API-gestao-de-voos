@@ -7,10 +7,12 @@ import java.time.temporal.ChronoUnit;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import luiz_dev.apivoos.model.config.security.Role;
 import luiz_dev.apivoos.model.domain.dto.ClientDTO;
 
 @Entity
@@ -29,6 +31,8 @@ public class Client implements Serializable{
     @Column(nullable = false, updatable = false)
     private LocalDate birthDate;
     private Boolean age;
+    @Enumerated
+    private Role role;
     
     public Client() {
     }
@@ -85,19 +89,19 @@ public class Client implements Serializable{
         return this.age;
     }
 
-    
     public Long getId() {
         return this.id;
     }
 
 
-    public void getIfIsAnAdult(){
+    public boolean getIfIsAnAdult(){
         Long age = ChronoUnit.YEARS.between(LocalDate.now(ZoneId.systemDefault()), birthDate);
         if (Integer.parseInt(age.toString()) < 18){
             this.age = false;
         }else{
             this.age = true;
         }
+        return this.age;
     }
 
     public ClientDTO toDTO(){

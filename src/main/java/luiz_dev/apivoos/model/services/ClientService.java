@@ -37,7 +37,7 @@ public class ClientService {
             repository.delete(c);
             return id;
         }else{
-            throw new ObjectNotFoundException("Object not found");
+            throw new ObjectNotFoundException("Client not found");
         }
     }
 

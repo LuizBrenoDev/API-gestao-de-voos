@@ -25,6 +25,9 @@ public class DataBaseConfig implements CommandLineRunner{
 
     @Override
     public void run(String... args) throws Exception {
+        repository.flush();
+        flightRepository.flush();
+
         Client c1 = new Client(null, "Client 1", "client1@gmail.com", 90856743268L, LocalDate.of(1985, 10, 10));
         Client c2 = new Client(null, "Client 2", "client2@gmail.com", 96425562715L, LocalDate.of(1995, 9, 17));
         Client c3 = new Client(null, "Client 3", "client3@gmail.com", 45567445199L, LocalDate.of(1985, 10, 10));
