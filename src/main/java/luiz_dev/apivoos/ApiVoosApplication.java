@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ApiVoosApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ApiVoosApplication.class, args);
+		SpringApplication.run(ApiVoosApplication.class);
 	}
 
 }

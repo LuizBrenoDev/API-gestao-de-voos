@@ -1,3 +1,6 @@
+DROP TABLE IF EXISTS myflight;
+CREATE TABLE IF NOT EXISTS myflight;
+
 USE myflight;
 
 CREATE TABLE clients (
@@ -6,7 +9,7 @@ CREATE TABLE clients (
     email VARCHAR(100) NOT NULL UNIQUE,
     cpf BIGINT NOT NULL UNIQUE,
     birth_date DATE NOT NULL,
-    role TINYINT NOT NULL
+    role ENUM("USER", "ADMIN", "TESTER") NOT NULL
 );
 
 CREATE TABLE flights (
